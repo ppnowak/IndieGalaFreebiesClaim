@@ -5,11 +5,11 @@ const isInLibrary = async page => (await page.$$(".fa-download")).length > 0;
 const notInLibrary = async page => !(await isInLibrary(page));
 
 const isAddToLibrary = async page => {
-    const [ element ] = await page.$$("#loadingBeforeAddToLibrary");
+    const [ element ] = await page.$$("#loginBeforeAddToLibrary");
     if (!element) {
         return false;
     }
-    return await element.eval(e => e.innerText.trim()) == 'ADD TO LIBRARY';
+    return await page.$eval("#loginBeforeAddToLibrary", e => e.innerText.trim()) == 'ADD TO LIBRARY';
 }; 
 
 const clickAddToLibrary = async page => await page.click("#loginBeforeAddToLibrary");
